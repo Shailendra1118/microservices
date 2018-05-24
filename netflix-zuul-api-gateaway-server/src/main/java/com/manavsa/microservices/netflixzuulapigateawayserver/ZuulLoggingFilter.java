@@ -4,11 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
+@Component // FTW this should always be there
 public class ZuulLoggingFilter extends ZuulFilter {
 
 	private Logger log = LoggerFactory.getLogger(this.getClass());
@@ -18,7 +20,7 @@ public class ZuulLoggingFilter extends ZuulFilter {
 		
 		RequestContext context = RequestContext.getCurrentContext();
 		HttpServletRequest req = context.getRequest();
-		log.info("request - {} request uri - {}",req, req.getRequestURI());
+		log.info("REQUEST - {} request uri - {}",req, req.getRequestURI());
 		
 		return null;
 	}
